@@ -1,5 +1,7 @@
 
 
+
+
 # Deploying instana self-hosted instance on IBM Cloud
 
 ### Prerequisites
@@ -291,7 +293,28 @@
 
    ![image-20211102185747148](images/image-20211102185747148.png)
 
+   ```shell
+   # curl -o setup_agent.sh https://setup.instana.io/agent && chmod 700 ./setup_agent.sh && sudo ./setup_agent.sh -a qUMhYJxjSv6uZh2SyqTEnw -t dynamic -e 159.8.100.150:1444 -m infra
    
+     % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                    Dload  Upload   Total   Spent    Left  Speed
+   100 20470  100 20470    0     0   3554      0  0:00:05  0:00:05 --:--:--  4819
+   Setting up the dynamic Instana agent for GNU/Linux
+   Are you sure? [y/N] y
+   Setting up Instana RPM repository
+   Updating YUM metadata
+   Installing Instana agent
+   ```
+
+   <u>Start Agent</u>
+
+   ```
+   # systemctl status instana-agent.service
+   
+   # systemctl start instana-agent.service
+   
+   # systemctl enable instana-agent.service
+   ```
 
    ![image-20211102194246817](images/image-20211102194246817.png)
 
