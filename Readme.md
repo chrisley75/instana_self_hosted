@@ -70,7 +70,44 @@
 
    
 
-5. init Terraform
+5. Edit VM properties
+
+   # Creation du serveur virtuel
+   # Create a virtual server with the SSH key
+   # https://ibm-cloud.github.io/tf-ibm-docs/v0.9.1/r/compute_vm_instance.html
+
+   ```shell
+   resource "ibm_compute_vm_instance" "instana" {
+     hostname            = "instana"
+     domain              = "opencley.com"
+     ssh_key_ids         = [ibm_compute_ssh_key.instana_key.id]
+   
+     ## Récuperation de l'image ID dans l'URL de l'image quand on clique dessus depuis le portail IBM Devices > Manage > Images
+   
+     ## To retrieve the image template ID from the IBM Cloud infrastructure customer portal, navigate to Devices > Manage > Images, click the image that you want, and note the ID number in the resulting URL.
+   
+     ## https://cloud.ibm.com/gen1/infrastructure/image-templates/$(image_id)/details#main
+   
+     #image_id           = "1354507"
+     os_reference_code   = "CENTOS_7_64"
+     datacenter          = "par01"
+     network_speed       = 100
+     cores               = 16
+     memory              = 65536
+     #local_disk          = false
+     #disks               = [150]
+     tags                = [
+       "instana",
+       "ibmcloud",
+       "self-hosted"
+     ]
+     public_security_group_ids = [ibm_security_group.instana_sg.id]
+   }
+   ```
+
+   Edit hostname, domain, datacenter if you want.
+
+6. Init Terraform
 
    `terraform init` command is used to initialize a working directory containing Terraform configuration files. This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control. It is safe to run this command multiple times.
 
@@ -92,7 +129,7 @@
 
    
 
-6. Plan deployment
+7. Plan deployment
 
    `terraform plan` command creates an execution plan. By default, creating a plan consists of:
 
@@ -158,7 +195,7 @@
 
    
 
-7. Apply deployment to create IBM Cloud resources
+8. Apply deployment to create IBM Cloud resources
 
    `terraform apply` command executes the actions proposed in a Terraform plan.
 
