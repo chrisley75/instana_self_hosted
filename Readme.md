@@ -72,11 +72,7 @@
 
 5. Edit VM properties
 
-   # Creation du serveur virtuel
-   # Create a virtual server with the SSH key
-   # https://ibm-cloud.github.io/tf-ibm-docs/v0.9.1/r/compute_vm_instance.html
-
-   ```shell
+   ```terraform
    resource "ibm_compute_vm_instance" "instana" {
      hostname            = "instana"
      domain              = "opencley.com"
@@ -105,7 +101,7 @@
    }
    ```
 
-   Edit hostname, domain, datacenter if you want.
+   Edit **hostname, domain, datacenter** if you want.
 
 6. Init Terraform
 
