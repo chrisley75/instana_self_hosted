@@ -220,7 +220,7 @@
 
    **This IP will be used for ansible Playbook and Instana FQDN .**
 
-   
+   ![image-20211102210720477](images/image-20211102210720477.png)
 
 ### Deploy Instana application with Ansible
 
@@ -263,7 +263,15 @@
 
    ![image-20211102184124961](images/image-20211102184124961.png)
 
-   
+   Instana deployment takes about 25 minutes.
+
+   Indeed, 31 images are pulled from instana repository to compose a self-hosted instance.
+
+   ![image-20211102212324493](images/image-20211102212324493.png)
+
+   Docker running containers
+
+   ![image-20211102212632910](images/image-20211102212632910.png)
 
 4) Output of Ansible
 
@@ -277,7 +285,7 @@
 
 5) Connect to instana
 
-   Go to https://<FQDN>
+   Go to https://FQDN
 
    (Accepted the risk due to self-generated certificate)
 
@@ -308,12 +316,12 @@
 
    <u>Start Agent</u>
 
-   ```
-   # systemctl status instana-agent.service
+   ```shell
+   systemctl status instana-agent.service
    
-   # systemctl start instana-agent.service
+   systemctl start instana-agent.service
    
-   # systemctl enable instana-agent.service
+   systemctl enable instana-agent.service
    ```
 
    ![image-20211102194246817](images/image-20211102194246817.png)
@@ -344,3 +352,14 @@ ibm_compute_vm_instance.instana: Refreshing state... [id=125456042]
 Destroy complete! Resources: 10 destroyed.
 ```
 
+
+
+### Troubleshooting
+
+Connect to VM instance and check following log:
+
+- /var/log/messages
+
+- /var/log/instana/console.log
+
+  
