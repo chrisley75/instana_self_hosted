@@ -1,0 +1,70 @@
+- name: "Install and configure Docker"
+  hosts: "{{ target | default('nothing') }}"
+  vars_prompt:
+    - name: type
+      prompt: Please choose Instana installation type (single/dual-instance/dual-clickhouse)?
+      private: no
+      default: single
+
+    - name: tenant
+      prompt: What is your tenant name?
+      private: no
+  
+    - name: unit
+      prompt: What is your unit name?
+      private: no
+
+    - name: AgentKey
+      prompt: Insert your agent key
+      private: no
+
+    - name: AgentKey2
+      prompt: Insert your download key or offical agent key
+      private: no
+
+    - name: SalesKey
+      prompt: Insert your sales key
+      private: no
+
+    - name: FQDN
+      prompt: Insert the FQDN of the host
+      private: no
+
+    - name: data_path
+      prompt: Where should your data be stored?
+      default: /mnt/data
+      private: no
+
+    - name: trace_path
+      prompt: Where should your trace data be stored?
+      default: /mnt/traces
+      private: no
+
+    - name: metric_path
+      prompt: Where should your metric data be stored?
+      default: /mnt/metrics
+      private: no
+
+    - name: log
+      prompt: Where should your logs be stored?
+      default: /var/log/instana
+      private: no
+
+    - name: cert
+      prompt: Path to your signed certificate file?
+      default: /root/cert/tls.crt
+      private: no
+
+    - name: certkey
+      prompt: Path to your private key file?
+      default: /root/cert/tls.key
+      private: no
+      
+  roles:
+    - geerlingguy.docker
+    - repository.copy
+    - settings.copy
+    - install.packages
+  vars:
+    ansible_user: root
+  become: true 

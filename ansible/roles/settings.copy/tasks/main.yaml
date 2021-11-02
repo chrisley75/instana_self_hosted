@@ -1,0 +1,12 @@
+- name: Creates Instana directory
+  file:
+    path: /root/instana
+    state: directory
+
+- name: Copy Instana generated configuration.
+  template:
+    src: instana-settings.hcl.j2
+    dest: "/root/instana/instana-settings.hcl"
+    owner: root
+    group: root
+    mode: 0644

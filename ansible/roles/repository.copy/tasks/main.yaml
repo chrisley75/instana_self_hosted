@@ -1,0 +1,4 @@
+- name: Copy instana repository
+  copy:
+    src: Instana-Product.repo
+    dest: /etc/yum.repos.d/Instana-Product.repo

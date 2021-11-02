@@ -1,0 +1,44 @@
+- name: Install package "instana-console"
+  ansible.builtin.package:
+    name: instana-console
+    state: present
+
+- name: Creates directory /mnt/data
+  file:
+    path: "{{ data_path }}"
+    state: directory
+
+- name: Creates directory /mnt/traces
+  file:
+    path: "{{ trace_path }}"
+    state: directory
+
+- name: Creates directory /mnt/metrics
+  file:
+    path: "{{ metric_path }}"
+    state: directory
+
+
+- name: Install instana with responses from ansible form
+  command: /usr/bin/instana init -f /root/instana/instana-settings.hcl -y 
+  register: instana_output
+
+- name: instana init installation logs
+  debug: 
+    var: instana_output.stdout_lines
+
+- name: Download Instana License
+  command: /usr/bin/instana license download
+  register: license_download_output
+
+- name: Download license status
+  debug: 
+    var: license_download_output.stdout_lines
+
+- name: Download Instana License
+  command: /usr/bin/instana license import
+  register: license_import_ouptut
+
+- name: Import license status
+  debug:
+    var: license_import_ouptut.stdout_lines
