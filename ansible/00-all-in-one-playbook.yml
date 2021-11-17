@@ -61,10 +61,16 @@
       private: no
       
   roles:
+    - proxy.settings
     - geerlingguy.docker
     - repository.copy
+    - docker-proxy.settings
     - settings.copy
     - install.packages
   vars:
     ansible_user: root
+    http_proxy: http://proxyclient:passw0rd@10.20.2.58:3128
+    https_proxy: http://proxyclient:passw0rd@10.20.2.58:3128
+    docker_http_proxy: HTTP_PROXY=http://proxyclient:passw0rd@10.20.2.58:3128
+    docker_https_proxy: HTTPS_PROXY=http://proxyclient:passw0rd@10.20.2.58:3128
   become: true 
